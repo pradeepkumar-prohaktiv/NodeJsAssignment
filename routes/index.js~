@@ -1,0 +1,27 @@
+var express = require('express');
+var router = express.Router();
+var db = require('../db/database');
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  
+  console.log("--------------------");
+  var sqlQuery = "select * from users";
+   db.query(sqlQuery,function (err,result){
+     if(err){
+         res.send('connection error');
+     };
+       res.send(result);
+   });
+
+    
+
+});
+
+
+router.get('/count', function(req, res, next) {
+console.log("Session "+req.session.page_views);
+  res.send("count isss "+req.session.page_views );
+});
+
+module.exports = router;
